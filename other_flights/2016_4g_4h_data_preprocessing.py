@@ -12,7 +12,7 @@ import directories
 import data_preprocessing
 
 flight_dates = ['20160830']
-campaign_dir = pathlib.Path(directories.top_dir, 'campaign_4')
+campaign_dir = pathlib.Path(directories.data_dir, 'campaign_4')
 
 # Make merged_data directory if it does not exist yet.
 if not pathlib.Path('merged_data').is_dir():

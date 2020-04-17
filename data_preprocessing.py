@@ -94,12 +94,12 @@ def haversine(X1, X2):
 
 if __name__ == '__main__':
     ### EXAMPLE CODE ###
-    top_dir = '/home/mike/research/barrel/data/campaign_3'
+    data_dir = '/home/mike/research/barrel/data/campaign_3'
     match_name = 'bar_*_l2_fspc_*.cdf'
 
     flight_dates = ['20150825', '20150826']
 
-    paths = sorted(pathlib.Path(top_dir).rglob(match_name), 
+    paths = sorted(pathlib.Path(data_dir).rglob(match_name), 
                     key=lambda i: i.name.split('_')[4])
 
     # Make a dictionary of dictionaries. The parent level dictionary
