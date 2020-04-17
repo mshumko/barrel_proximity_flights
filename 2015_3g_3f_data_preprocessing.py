@@ -84,7 +84,10 @@ for path in fs_paths:
 fs_merged = {}
 
 for date in fs:
-    fs_merged[date] = data_preprocessing.merge_ballon_data(fs[date])
+    fs_merged[date] = data_preprocessing.merge_ballon_data(
+                            fs[date], 
+                            tolerance_min=1/60
+                            )
 
 fs_merged = data_preprocessing.merge_ballon_times(fs_merged)
 
