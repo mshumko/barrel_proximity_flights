@@ -25,11 +25,14 @@ ephem_save_name = 'barrel_4c_4d_merged_ephemeris.csv'
 
 ephem_paths = sorted(campaign_dir.rglob(ephem_match_name), 
                 key=lambda i: i.name.split('_')[4])
-print('2016 BARREL campaign fast ephemeris files (not all will be processed):')
+print('2016 BARREL campaign fast ephemeris files sorted by date'
+    ' (not all will be processed):')
+
 for path in ephem_paths:
     print(path.name)
 
 """
+For reference here are the files I have.
 bar_4C_l2_ephm_20160821_v06.cdf
 bar_4D_l2_ephm_20160821_v06.cdf
 bar_4C_l2_ephm_20160822_v06.cdf
@@ -74,7 +77,8 @@ fs_save_name = 'barrel_4c_4d_merged_fast_spectra.csv'
 fs_paths = sorted(campaign_dir.rglob(fs_match_name), 
                 key=lambda i: i.name.split('_')[4])
 
-print('2016 BARREL campaign fast spectra files (not all will be processed):')
+print('2016 BARREL campaign fast spectra files sorted by date'
+    ' (not all will be processed):')
 for path in fs_paths:
     print(path.name)
 

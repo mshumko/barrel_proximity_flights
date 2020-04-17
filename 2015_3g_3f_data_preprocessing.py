@@ -26,7 +26,8 @@ ephem_save_name = 'barrel_3g_3f_merged_ephemeris.csv'
 
 ephem_paths = sorted(campaign_dir.rglob(ephem_match_name), 
                 key=lambda i: i.name.split('_')[4])
-print('2015 BARREL campaign fast ephemeris files (not all will be processed):')
+print('2015 BARREL campaign fast ephemeris files sorted by date'
+    ' (not all will be processed):')
 for path in ephem_paths:
     print(path.name)
 
@@ -63,7 +64,8 @@ fs_save_name = 'barrel_3g_3f_merged_fast_spectra.csv'
 fs_paths = sorted(campaign_dir.rglob(fs_match_name), 
                 key=lambda i: i.name.split('_')[4])
 
-print('2015 BARREL campaign fast spectra files (not all will be processed):')
+print('2015 BARREL campaign fast spectra files sorted by date '
+    '(not all will be processed):')
 for path in fs_paths:
     print(path.name)
 
