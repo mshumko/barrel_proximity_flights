@@ -88,5 +88,5 @@ for date in fs:
 
 fs_merged = data_preprocessing.merge_ballon_times(fs_merged)
 
-ephem_merged.to_csv(pathlib.Path('merged_data', fs_save_name), 
+fs_merged.to_csv(pathlib.Path('merged_data', fs_save_name), 
                     index_label='Time')
