@@ -6,8 +6,6 @@ import pathlib
 import datetime
 
 import spacepy.pycdf
-import cartopy
-import cartopy.crs as ccrs
 
 """
 The two balloons in question are:
@@ -28,9 +26,9 @@ def load_barrel_ephem(path, columns='default'):
                 'L_Kp6', 'MLT_Kp2_T89c', 'MLT_Kp6_T89c']
 
     ephem = spacepy.pycdf.CDF(path)
-    ephem_df = pd.DataFrame({key:ephem[key][:] for key in columns}, )
+    ephem_df = pd.DataFrame({key:ephem[key][...] for key in columns}, )
     ephem_df.replace(-1E31, np.nan, inplace=True)
-    ephem_df.index = ephem['Epoch'][:]
+    ephem_df.index = ephem['Epoch'][...] 
     ephem_df.dropna(inplace=True)
     return ephem_df
 
@@ -48,7 +46,7 @@ def load_barrel_spectra(path):
     spec.sort_index(inplace=True)
     return spec
 
-def merge_ballon_positions(ephem, tolerance_min=5):
+def merge_ballon_data(ephem, tolerance_min=5):
     """
     Merge the balloons DataFrames by time. Ephem is a dictionary 
     of DataFrames. Will merge the DataFrames with the nearest time 
@@ -66,14 +64,14 @@ def merge_ballon_positions(ephem, tolerance_min=5):
                                     for column in ephem[payload].columns]
 
     # Merge the two DataFrames 
-    payload_keys = [key for key, _ in ephem.items()]
-    merged_df = pd.merge_asof(ephem[payload_keys[0]], ephem[payload_keys[1]], 
+    payload_id = [key for key, _ in ephem.items()]
+    merged_df = pd.merge_asof(ephem[payload_id[0]], ephem[payload_id[1]], 
                                 left_index=True, right_index=True, 
                                 direction='nearest', 
                                 tolerance=pd.Timedelta(minutes=tolerance_min))
     return merged_df
 
-def merge_ballon_time(ephem):
+def merge_ballon_times(ephem):
     """
     Concatenate the ephemeris over multiple days.
     """
@@ -121,8 +119,11 @@ if __name__ == '__main__':
     merged_fs = {}
 
     for date in fs:
-        merged_fs[date] = merge_ballon_positions(fs[date])
+        merged_fs[date] = merge_ballon_data(fs[date])
 
-    merged_fs = merge_ballon_time(merged_fs)
+    merged_fs = merge_ballon_times(merged_fs)
     
     
+    path = ('/home/mike/research/barrel/data/campaign_3/3G/150825/'
+            'bar_3G_l2_ephm_20150825_v05.cdf')
+    df, time = load_barrel_ephem(path)
