@@ -57,11 +57,9 @@ def merge_ballon_data(ephem, tolerance_min=5):
                                     f'Got {len(ephem.keys())}')
 
     # Prefix the payload id to each the dataFrame keys.
+    # Also look at the pd.merge docs for suffix.
     for payload in ephem:
-        # ephem[payload].columns = ['_'.join([payload, column.split('_')[-1]]) 
-        #                         for column in ephem[payload].columns]
-        ephem[payload].columns = [f'{payload}_{column}' 
-                                    for column in ephem[payload].columns]
+        ephem[payload] = ephem[payload].add_prefix(f'{payload}_') 
 
     # Merge the two DataFrames 
     payload_id = [key for key, _ in ephem.items()]
