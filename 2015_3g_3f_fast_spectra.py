@@ -13,12 +13,12 @@ save_fig = False
 fs_path = pathlib.Path('merged_data', 'barrel_3g_3f_merged_fast_spectra.csv')
 ephem_dir = pathlib.Path('merged_data', 'barrel_3g_3f_merged_ephemeris.csv')
 
-fs = pd.read_csv(fs_path, index_col=0)
-fs.index = pd.to_datetime(fs.index)
+fs = pd.read_csv(fs_path, index_col=0, parse_dates=True)
+# fs.index = pd.to_datetime(fs.index)
 print(fs.head())
 
-ephem = pd.read_csv(ephem_dir, index_col=0)
-ephem.index = pd.to_datetime(ephem.index)
+ephem = pd.read_csv(ephem_dir, index_col=0, parse_dates=True)
+# ephem.index = pd.to_datetime(ephem.index)
 print(ephem.head())
 
 # Filter the fast spectra

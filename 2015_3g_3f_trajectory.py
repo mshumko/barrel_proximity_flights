@@ -11,8 +11,8 @@ register_matplotlib_converters()
 save_fig = False
 data_dir = pathlib.Path('merged_data', 'barrel_3g_3f_merged_ephemeris.csv')
 
-ephem = pd.read_csv(data_dir, index_col=0)
-ephem.index = pd.to_datetime(ephem.index)
+ephem = pd.read_csv(data_dir, index_col=0, parse_dates=True)
+# ephem.index = pd.to_datetime(ephem.index)
 print(ephem.head())
 
 # Downsample ephemeris for plotting
